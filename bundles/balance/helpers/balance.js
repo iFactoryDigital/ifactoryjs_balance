@@ -1,7 +1,7 @@
 
 // require dependencies
+const money  = require('money-math');
 const colors = require('colors');
-const socket = require('socket');
 const Helper = require('helper');
 
 /**
@@ -35,44 +35,32 @@ class BalanceHelper extends Helper {
     // refresh user
     await user.lock();
 
-    // check amount is positive
-    amount = parseFloat(amount);
-
     // check amount
-    if (!amount || amount < 0) {
-      // send done
-      user.unlock();
-
-      // return false
-      return false;
+    if (typeof amount !== 'string') {
+      // set amount
+      amount = money.floatToAmount(amount);
     }
 
     // add money to users account
     let current = user.get('balance') || 0;
 
-    // check current balance
-    if (!current || isNaN(current) || parseFloat(Number(current)) !== current) current = 0;
+    // check amount
+    if (typeof current !== 'string') {
+      // set amount
+      current = money.floatToAmount(current);
+    }
 
-    // parse current
-    current = parseFloat(current);
-
-    // add money
-    user.set('balance', Math.floor(Math.round((current + amount) * 100)) / 100);
-
-    // log this
-    this._log(user, 'add', `added ${amount} to balance - new balance "${user.get('balance')}"`, true);
+    // add
+    user.set('balance', money.add(current, amount));
 
     // save user
     await user.save();
-
-    // timeout balance emission
-    socket.user(user, 'balance', user.get('balance'));
 
     // unlock
     user.unlock();
 
     // return true
-    return false;
+    return true;
   }
 
   /**
@@ -87,49 +75,40 @@ class BalanceHelper extends Helper {
     // refresh user
     await user.lock();
 
-    // check amount is positive
-    amount = parseFloat(amount);
+    // check amount
+    if (typeof amount !== 'string') {
+      // set amount
+      amount = money.floatToAmount(amount);
+    }
+
+    // add money to users account
+    let current = user.get('balance') || 0;
 
     // check amount
-    if (!amount || amount < 0) {
-      // send done
+    if (typeof current !== 'string') {
+      // set amount
+      current = money.floatToAmount(current);
+    }
+
+    // return false
+    if (money.isNegative(money.subtract(current, amount))) {
+      // unlock user
       user.unlock();
 
       // return false
       return false;
     }
 
-    // add money to users account
-    let current = user.get('balance') || 0;
-
-    // check current balance
-    if (!current || isNaN(current) || parseFloat(Number(current)) !== current) current = 0;
-
-    // check user has enough to take off
-    if (current < amount) {
-      // run done
-      user.unlock();
-
-      // check amount
-      return false;
-    }
-
-    // add money
-    user.set('balance', Math.floor(Math.round((current - amount) * 100)) / 100);
-
-    // log this
-    this._log(user, 'subtract', `subracted ${amount} from balance - new balance "${user.get('balance')}"`, true);
+    // add
+    user.set('balance', money.subtract(current, amount));
 
     // save user
     await user.save();
 
-    // emit new balance
-    socket.user(user, 'balance', user.get('balance'));
-
     // unlock
     user.unlock();
 
-    // check amount
+    // return true
     return true;
   }
 

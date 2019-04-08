@@ -2,7 +2,9 @@
   "name": "@edenjs/balance",
   "description": "",
   "version": "1.0.0",
-  "dependencies": {},
+  "dependencies": {
+    "money-math": "^2.5.1"
+  },
   "engines": {
     "node": ">= 8.0.0"
   },
