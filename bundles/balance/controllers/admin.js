@@ -243,7 +243,33 @@ class BalanceAdminController extends Controller {
    */
   async productAdminHook(product) {
     // set customer and account
-    product.opts.sections.unshift('balance-credit');
+    if (!product.opts.sections.includes('balance-credit')) product.opts.sections.unshift('balance-credit');
+  }
+
+  /**
+   * submit hook
+   *
+   * @param  {Product} product
+   *
+   * @pre    product.submit
+   * @return {Promise}
+   */
+  async productSubmitHook(req, product) {
+    // Set pricing
+    product.set('balance', req.body.balance || {});
+  }
+
+  /**
+   * submit hook
+   *
+   * @param  {Product} product
+   *
+   * @pre    product.sanitise
+   * @return {Promise}
+   */
+  async productSanitiseHook({ product, sanitised }) {
+    // Set pricing
+    sanitised.balance = product.get('balance') || {};
   }
 
 
