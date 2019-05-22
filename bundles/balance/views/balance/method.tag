@@ -5,7 +5,7 @@
         <div class="w-100">
           <div class="custom-control custom-radio">
             <input name="payment-method-{ getUUID() }" value="balance" type="radio" class="custom-control-input" checked={ opts.val.type === opts.method.type } />
-            <label class="custom-control-label">Use Balance Funds</label>
+            <label class="custom-control-label">Account Credit</label>
           </div>
         </div>
       </div>
