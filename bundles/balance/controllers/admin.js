@@ -233,6 +233,19 @@ class BalanceAdminController extends Controller {
     sanitised.balance = user.get('balance') || 0;
   }
 
+  /**
+   * add field to products in admin
+   *
+   * @param {Object} *
+   *
+   * @pre    product.admin.sanitise
+   * @return {Promise}
+   */
+  async productAdminHook(product) {
+    // set customer and account
+    product.opts.sections.unshift('balance-credit');
+  }
+
 
   // ////////////////////////////////////////////////////////////////////////////
   //
