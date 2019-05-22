@@ -65,8 +65,12 @@ class BalanceAdminController extends Controller {
     // Check super
     if (payment.get('method.type') !== 'balance') return;
 
+    // get order
+    const invoice = await payment.get('invoice');
+    const order = (await invoice.get('orders'))[0];
+
     // subtract
-    if (await balanceHelper.subtract(await payment.get('user'), payment.get('amount'), payment)) {
+    if (await balanceHelper.subtract(await order.get('user'), payment.get('amount'), payment)) {
       // set complete
       payment.set('complete', true);
     }

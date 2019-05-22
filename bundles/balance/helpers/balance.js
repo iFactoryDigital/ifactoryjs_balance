@@ -90,8 +90,6 @@ class BalanceHelper extends Helper {
       current = money.floatToAmount(current);
     }
 
-    console.log(current, amount);
-
     // return false
     if (money.isNegative(money.subtract(current, amount))) {
       // unlock user
