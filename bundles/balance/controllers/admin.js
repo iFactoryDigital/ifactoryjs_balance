@@ -192,10 +192,13 @@ class BalanceAdminController extends Controller {
 
     // get order
     const invoice = await payment.get('invoice');
-    const order = (await invoice.get('orders'))[0];
+
+    // get order
+    const order = invoice ? (await invoice.get('orders') || [])[0] : null;
+    const user = await payment.get('user') || (order ? await order.get('user') : await invoice.get('user'));
 
     // subtract
-    if (await balanceHelper.subtract(await order.get('user'), payment.get('amount'), payment)) {
+    if (await balanceHelper.subtract(user, payment.get('amount'), payment)) {
       // set complete
       payment.set('complete', true);
     }
