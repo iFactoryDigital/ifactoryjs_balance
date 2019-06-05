@@ -183,6 +183,41 @@ class BalanceAdminController extends Controller {
    *
    * @param {Payment} payment
    *
+   * @pre    order.complete
+   * @return {Promise}
+   */
+  async completeHook(order) {
+    // get products
+    const lines    = order.get('lines');
+    const products = await order.get('products');
+
+    // get balance products
+    const balanceAdd = (lines.map((line) => {
+      // get product
+      const product = products.find(p => p.get('_id').toString() === line.product);
+
+      // parse float
+      if (parseFloat(product.get('balance.amount'))) {
+        // return value
+        return parseInt(line.qty) * parseFloat(product.get('balance.amount'));
+      }
+
+      // return
+      return 0;
+    }).reduce((accum, value) => accum + value, 0));
+
+    // add balance
+    if (balanceAdd > 0) {
+      // subtract
+      await balanceHelper.add(await order.get('user'), balanceAdd);
+    }
+  }
+
+  /**
+   * Pay using Payment Method
+   *
+   * @param {Payment} payment
+   *
    * @pre    payment.pay
    * @return {Promise}
    */
