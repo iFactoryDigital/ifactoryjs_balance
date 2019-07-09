@@ -251,11 +251,14 @@ class BalanceAdminController extends Controller {
     // get order user
     const user = await order.get('user');
 
-    // check account and customer
-    if (user) {
-      // set customer and account
-      sanitised.actions.payment.balance = user.get('balance') || 0;
-    }
+    // try/catch
+    try {
+      // check account and customer
+      if (user) {
+        // set customer and account
+        sanitised.actions.payment.balance = user.get('balance') || 0;
+      }
+    } catch (e) {}
   }
 
   /**
