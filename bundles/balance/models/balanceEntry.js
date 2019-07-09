@@ -9,9 +9,9 @@ class BalanceEntry extends Model {
   /**
    * construct audit model
    */
-  constructor() {
+  constructor(...args) {
     // run super
-    super(...arguments);
+    super(...args);
 
     // bind methods
     this.sanitise = this.sanitise.bind(this);

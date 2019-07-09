@@ -1,12 +1,12 @@
+/* eslint-disable no-empty */
 
 /**
  * Created by Awesome on 1/30/2016.
  */
 
 // Require dependencies
-const Grid        = require('grid');
-const Controller  = require('controller');
-const escapeRegex = require('escape-string-regexp');
+const Grid       = require('grid');
+const Controller = require('controller');
 
 // Require models
 const Block = model('block');
@@ -199,7 +199,7 @@ class BalanceAdminController extends Controller {
       // parse float
       if (parseFloat(product.get('balance.amount'))) {
         // return value
-        return parseInt(line.qty) * parseFloat(product.get('balance.amount'));
+        return parseInt(line.qty, 10) * parseFloat(product.get('balance.amount'));
       }
 
       // return
@@ -327,7 +327,7 @@ class BalanceAdminController extends Controller {
    *
    * @return {grid}
    */
-  async _grid(req) {
+  async _grid() {
     // Create new grid
     const balanceGrid = new Grid();
 
@@ -394,4 +394,4 @@ class BalanceAdminController extends Controller {
  *
  * @type {BalanceAdminController}
  */
-exports = module.exports = BalanceAdminController;
+module.exports = BalanceAdminController;
