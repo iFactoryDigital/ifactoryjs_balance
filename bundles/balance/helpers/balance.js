@@ -53,14 +53,30 @@ class BalanceHelper extends Helper {
       current = money.floatToAmount(current);
     }
 
-    // add
-    user.set('balance', money.add(current, amount));
+    // set data
+    const data = {
+      user,
+      amount,
+      current,
+      payment,
+      direction : 'add',
+    };
 
-    // save account
-    await user.save();
+    // await hook
+    await this.eden.hook('balance.change', data, async () => {
+      // return on prevent
+      if (data.prevent) return;
 
-    // record
-    this._record(user, 'add', `Added ${amount} to ${user.get('_id').toString()}`, true, amount, user.get('balance'), payment);
+      // add
+      user.set('balance', money.add(current, amount));
+
+      // save account
+      await user.save();
+
+      // record
+      this._record(user, 'add', `Added ${amount} to ${user.get('_id').toString()}`, true, amount, user.get('balance'), payment);
+    });
+
 
     // unlock
     user.unlock();
@@ -96,14 +112,29 @@ class BalanceHelper extends Helper {
       current = money.floatToAmount(current);
     }
 
-    // add
-    user.set('balance', money.subtract(current, amount));
+    // set data
+    const data = {
+      user,
+      amount,
+      current,
+      payment,
+      direction : 'subtract',
+    };
 
-    // record
-    this._record(user, 'subtract', `Subtracted ${amount} from ${user.get('_id').toString()}`, true, amount, user.get('balance'), payment);
+    // await hook
+    await this.eden.hook('balance.change', data, async () => {
+      // return on prevent
+      if (data.prevent) return;
 
-    // save account
-    await user.save();
+      // add
+      user.set('balance', money.subtract(current, amount));
+
+      // save account
+      await user.save();
+
+      // record
+      this._record(user, 'subtract', `Subtracted ${amount} from ${user.get('_id').toString()}`, true, amount, user.get('balance'), payment);
+    });
 
     // unlock
     user.unlock();
