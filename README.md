@@ -43,7 +43,7 @@ const data = await entry.sanitise();
 
 ## Hooks
 
-### `balance.change` _[Usage](https://github.com/eden-js/audit/blob/master/bundles/audit/daemons/audit.js#L60)_
+### `balance.change` _[Usage](https://github.com/eden-js/balance/blob/master/bundles/balance/helpers/balance.js#L66)_ _[Usage](https://github.com/eden-js/balance/blob/master/bundles/balance/helpers/balance.js#L125)_
 
 
 Balance change hook allows us to prevent/change a balance transaction on a user based on parameters.
@@ -57,6 +57,7 @@ this.eden.pre('balance.change', (data) => {
 
   // prevent balance change by setting prevent : true
   data.prevent = true;
+  data.complete = true;
 });
 ```
 

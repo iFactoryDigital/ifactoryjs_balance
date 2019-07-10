@@ -59,6 +59,7 @@ class BalanceHelper extends Helper {
       amount,
       current,
       payment,
+      complete  : true,
       direction : 'add',
     };
 
@@ -82,7 +83,7 @@ class BalanceHelper extends Helper {
     user.unlock();
 
     // return true
-    return true;
+    return data.complete;
   }
 
   /**
@@ -118,6 +119,7 @@ class BalanceHelper extends Helper {
       amount,
       current,
       payment,
+      complete  : true,
       direction : 'subtract',
     };
 
@@ -140,7 +142,7 @@ class BalanceHelper extends Helper {
     user.unlock();
 
     // return true
-    return true;
+    return data.complete;
   }
 
   /**
