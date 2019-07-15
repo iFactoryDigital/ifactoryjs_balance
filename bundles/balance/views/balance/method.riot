@@ -1,0 +1,58 @@
+<balance-method>
+  <a href="#!" onclick={ (e) => onMethod(e) }>
+    <div class="row">
+      <div class="col-8 d-flex align-items-center">
+        <div class="w-100">
+          <div class="custom-control custom-radio">
+            <input name={ `payment-method-${getUUID()}` } value="balance" type="radio" class="custom-control-input" checked={ props.val.type === props.method.type } />
+            <label class="custom-control-label">Account Credit</label>
+          </div>
+        </div>
+      </div>
+      <div class="col-4 text-right">
+        <b class="text-success h4 m-0">
+          <money amount={ props.action.balance } />
+        </b>
+      </div>
+    </div>
+  </a>
+
+  <script>
+    // import base
+    import Base from '../js/base';
+
+    // export default
+    export default class BalanceMethod extends Base {
+
+      /**
+       * on method function
+       *
+       * @param  {Event} e
+       */
+      onMethod (e) {
+        // prevent default
+        e.preventDefault();
+        e.stopPropagation();
+
+        // method data
+        this.props.method.data = {};
+
+        // on ready
+        opts.onReady(this.props.method);
+      }
+
+      /**
+      * returns uuid
+      *
+      * @return {String}
+      */
+      getUUID () {
+        // require uuid
+        let uuid = require('uuid');
+
+        // return uuid
+        return uuid();
+      }
+    }
+  </script>
+</balance-method>

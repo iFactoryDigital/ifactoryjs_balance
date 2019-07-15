@@ -1,0 +1,70 @@
+<product-balance-credit>
+  <div class="card mb-3">
+    <div class="card-header">
+      Account Credits
+    </div>
+    <div class="card-body">
+      <input type="hidden" name="balance[type]" value={ type } />
+      <div class="form-group">
+        <label for="credit-value">
+          Account Credits
+        </label>
+        <div class="input-group">
+          <div class="input-group-prepend" if={ type === 'value' }>
+            <span class="input-group-text">$</span>
+          </div>
+          <input id="credit-value" class="form-control" type="number" step="0.01" name="balance[amount]" value={ props.product.balance.amount || 0 } />
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              { type === 'value' ? eden.get('shop.currency') : '%' }
+            </button>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="#" data-type="value" onclick={ (e) => onType(e) }>
+                { eden.get('shop.currency') }
+              </a>
+              <a class="dropdown-item" href="#" data-type="percentage" onclick={ (e) => onType(e) }>
+                %
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+  <script>
+    // import base
+    import Base from '../js/base';
+
+    // export default class
+    export default class ProductBaseCredit extends Base {
+      
+      /**
+       * on before mount
+       *
+       * @param {Object} props
+       */
+      onBeforeMount(props) {
+        // on before mount
+        super.onBeforeMount(...arguments);
+
+        // set type
+        this.type = (props.product.balance || {}).type || 'value';
+      }
+    
+      /**
+       * sets type
+       *
+       * @param  {Event} e
+       */
+      onType(e) {
+        // on type
+        this.type = jQuery(e.target).attr('data-type');
+        
+        // update
+        this.update();
+      }
+    }
+  </script>
+</product-balance-credit>
