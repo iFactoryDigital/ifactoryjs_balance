@@ -236,6 +236,13 @@ class BalanceAdminController extends Controller {
     if (await balanceHelper.subtract(user, payment.get('amount'), payment)) {
       // set complete
       payment.set('complete', true);
+    } else {
+      // set payment details
+      payment.set('complete', false);
+      payment.set('error', {
+        id   : 'balance.fail',
+        text : 'Insufficient Balance',
+      });
     }
   }
 

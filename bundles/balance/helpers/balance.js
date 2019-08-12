@@ -128,6 +128,15 @@ class BalanceHelper extends Helper {
       // return on prevent
       if (data.prevent) return;
 
+      // prevent
+      if (money.isNegative(money.subtract(current, amount))) {
+        // set false
+        data.complete = false;
+
+        // return
+        return;
+      }
+
       // add
       user.set('balance', money.subtract(current, amount));
 
