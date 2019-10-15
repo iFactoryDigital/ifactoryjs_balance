@@ -1,5 +1,5 @@
 {
-  "name": "@edenjs/balance",
+  "name": "@ifactoryjs/balance",
   "description": "",
   "version": "1.1.5",
   "dependencies": {
@@ -14,14 +14,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/eden-js/balance.git"
+    "url": "git+https://github.com/ifactorydigital/ifactoryjs_balance.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/eden-js/balance/issues"
+    "url": "https://github.com/ifactorydigital/ifactoryjs_balance/issues"
   },
-  "homepage": "https://github.com/eden-js/balance#readme",
+  "homepage": "https://github.com/ifactorydigital/ifactoryjs_balance#readme",
   "devDependencies": {
     "@edenjs/eslint-config-eden": "^2.0.14",
     "eslint": "^5.13.0",

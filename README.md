@@ -1,8 +1,8 @@
 # EdenJS - Balance
-[![TravisCI](https://travis-ci.com/eden-js/balance.svg?branch=master)](https://travis-ci.com/eden-js/balance)
-[![Issues](https://img.shields.io/github/issues/eden-js/balance.svg)](https://github.com/eden-js/balance/issues)
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/eden-js/balance)
-[![Awesome](https://img.shields.io/badge/awesome-true-green.svg)](https://github.com/eden-js/balance)
+[![TravisCI](https://travis-ci.com/ifactorydigital/ifactoryjs_balance.svg?branch=master)](https://travis-ci.com/ifactorydigital/ifactoryjs_balance)
+[![Issues](https://img.shields.io/github/issues/ifactorydigital/ifactoryjs_balance.svg)](https://github.com/ifactorydigital/ifactoryjs_balance/issues)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/ifactorydigital/ifactoryjs_balance)
+[![Awesome](https://img.shields.io/badge/awesome-true-green.svg)](https://github.com/ifactorydigital/ifactoryjs_balance)
 [![Discord](https://img.shields.io/discord/583845970433933312.svg)](https://discord.gg/5u3f3up)
 
 User Balance base logic component for [EdenJS](https://github.com/edenjs-cli)
@@ -24,7 +24,7 @@ No configuration is required for this module
 ## Models
 
 
-### `BalanceEntry` _[Usage](https://github.com/eden-js/balance/blob/master/bundles/balance/models/balanceEntry.js)_
+### `BalanceEntry` _[Usage](https://github.com/ifactorydigital/ifactoryjs_balance/blob/master/bundles/balance/models/balanceEntry.js)_
 
 BalanceEntry model consits of a single entry for each change on a users balance.
 
@@ -43,7 +43,7 @@ const data = await entry.sanitise();
 
 ## Hooks
 
-### `balance.change` _[Usage](https://github.com/eden-js/balance/blob/master/bundles/balance/helpers/balance.js#L66)_ _[Usage](https://github.com/eden-js/balance/blob/master/bundles/balance/helpers/balance.js#L125)_
+### `balance.change` _[Usage](https://github.com/ifactorydigital/ifactoryjs_balance/blob/master/bundles/balance/helpers/balance.js#L66)_ _[Usage](https://github.com/ifactorydigital/ifactoryjs_balance/blob/master/bundles/balance/helpers/balance.js#L125)_
 
 
 Balance change hook allows us to prevent/change a balance transaction on a user based on parameters.
@@ -63,7 +63,7 @@ this.eden.pre('balance.change', (data) => {
 
 ## Helpers
 
-### `balance` _[Usage](https://github.com/eden-js/audit/blob/master/bundles/balance/helpers/balance.js)_
+### `balance` _[Usage](https://github.com/ifactorydigital/ifactoryjs_audit/blob/master/bundles/balance/helpers/balance.js)_
 
 Balance helper applies balance changes to users automatically.
 
